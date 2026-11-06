@@ -1,5 +1,6 @@
-// Types
-import type { Project } from '../types/wordpress';
+// Schemas
+import { ProjectSchema, type Project } from '../schemas/wordpress';
+import { ExperienceSchema, type Experience } from '../schemas/wordpress';
 
 // Constante Wordpress API URL
 const WORDPRESS_API_URL = import.meta.env.WORDPRESS_API_URL;
@@ -23,13 +24,13 @@ async function fetchWordPress(endpoint: string) {
 // Función para obtener Proyectos
 async function getProjects(): Promise<Project[]> {
   const projects = await fetchWordPress('projects');
-  return projects;
+  return ProjectSchema.array().parse(projects);
 }
 
 // Función para obtener Experiencias
-async function getExperiences() {
+async function getExperiences(): Promise<Experience[]> {
   const experiences = await fetchWordPress('experiences');
-  return experiences;
+  return ExperienceSchema.array().parse(experiences);
 }
 
 // Exports
