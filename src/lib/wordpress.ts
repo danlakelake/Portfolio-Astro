@@ -1,10 +1,13 @@
+// Types
+import type { Project } from '../types/wordpress';
+
 // Constante Wordpress API URL
 const WORDPRESS_API_URL = import.meta.env.WORDPRESS_API_URL;
 
 // Consulta cualquier endpoint de la Api Wordpress dependiendo el parametro
 async function fetchWordPress(endpoint: string) {
   // Constante de llamada a la Api con endpoint dinámico
-  const url = `${WORDPRESS_API_URL}/${endpoint}`;
+  const url = `${WORDPRESS_API_URL}/${endpoint}?_embed=1`;
 
   const response = await fetch(url);
 
@@ -18,7 +21,7 @@ async function fetchWordPress(endpoint: string) {
 }
 
 // Función para obtener Proyectos
-async function getProjects() {
+async function getProjects(): Promise<Project[]> {
   const projects = await fetchWordPress('projects');
   return projects;
 }
