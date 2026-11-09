@@ -1,16 +1,35 @@
 ---
 import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
 ---
+
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content= />
+
+    <meta name="author" content="Daniel Aguilar" />
+    <meta name="description" content= />
+
+    <meta property="og:title" content= />
+    <meta property="og:description" content=/>
+    <meta
+      property="og:image"
+      content="https://danlakelake.github.io/Portfolio/resources/images/profile.webp"
+    />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Portfolio</title>
+
+    <title></title>
   </head>
+
   <body>
     <slot />
   </body>

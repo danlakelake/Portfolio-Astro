@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+// Media Schema
 const WordPressMediaSchema = z.object({
   id: z.number(),
   source_url: z.string(),
@@ -10,6 +11,30 @@ const WordPressMediaSchema = z.object({
 
 export type WordPressMedia = z.infer<typeof WordPressMediaSchema>;
 
+// Profile Schema
+export const ProfileSchema = z.object({
+  id: z.number(),
+  slug: z.string(),
+  title: z.object({
+    rendered: z.string(),
+  }),
+  content: z.object({
+    rendered: z.string(),
+  }),
+  acf: z.object({
+    profile_name: z.string(),
+    professional_title: z.enum(['frontend', 'backend', 'fullstack']),
+    profile_image: z.url(),
+    linkedin_url: z.url(),
+    github_url: z.url(),
+    behance_url: z.url(),
+    phone_number: z.string(),
+  }),
+});
+
+export type Profile = z.infer<typeof ProfileSchema>;
+
+// Projects Schema
 export const ProjectSchema = z.object({
   id: z.number(),
   acf: z.object({
@@ -21,6 +46,9 @@ export const ProjectSchema = z.object({
   }),
 });
 
+export type Project = z.infer<typeof ProjectSchema>;
+
+// Experiences Schema
 export const ExperienceSchema = z.object({
   id: z.number(),
   title: z.object({
@@ -37,5 +65,4 @@ export const ExperienceSchema = z.object({
   }),
 });
 
-export type Project = z.infer<typeof ProjectSchema>;
 export type Experience = z.infer<typeof ExperienceSchema>;

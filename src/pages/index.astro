@@ -1,9 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getProjects, getExperiences } from '../lib/wordpress';
+import { getProjects, getExperiences, getProfile } from '../lib/wordpress';
 
 const projects = await getProjects();
 const experiences = await getExperiences();
+const profile = await getProfile();
+console.log(profile);
 
 ---
 
