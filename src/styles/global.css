@@ -4,11 +4,9 @@
 @theme {
   /* Primary colors */
   --color-primary: var(--color-indigo-500);
-
   /* Background colors */
   --color-background: var(--color-stone-100);
   --color-surface: #fff;
-
   /* Text colors */
   --color-text: var(--color-gray-700);
 }

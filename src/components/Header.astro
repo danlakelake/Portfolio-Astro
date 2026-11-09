@@ -1,5 +1,5 @@
 ---
-import { Menu, X } from '@lucide/astro';
+import { Menu, X, Globe } from '@lucide/astro';
 
 // Define las propiedades
 interface MenuItem {
@@ -16,11 +16,24 @@ const menuItems: MenuItem[] = [
 ];
 ---
 
-<!-- Responsive Menu -->
-<div class="flex justify-end items-center px-7 py-2 md:hidden">
+<!-- Language Switch & Responsive Menu -->
+<div
+  class="flex w-full justify-between items-center px-7 py-2 md:justify-end md:px-12"
+>
+  <!-- Language Switch -->
+  <button
+    id="langSwitch"
+    class="flex items-center gap-2 rounded-full bg-primary px-4 py-2 font-bold text-white shadow-md transition cursor-pointer"
+    aria-label="Cambiar idioma"
+  >
+    <Globe size={18} class="stroke-2" />
+    <span>EN</span>
+  </button>
+  
+  <!-- Responsive Menu -->
   <button
     id="menuToggle"
-    class="text-2xl cursor-pointer"
+    class="text-2xl cursor-pointer md:hidden"
     aria-label="Abrir menú"
     aria-expanded="false"
   >
@@ -28,6 +41,7 @@ const menuItems: MenuItem[] = [
     <X id="iconClose" size={32} class="stroke-2 hidden animate-fadeIn" />
   </button>
 </div>
+
 <!-- Menu -->
 <nav
   id="mainMenu"
