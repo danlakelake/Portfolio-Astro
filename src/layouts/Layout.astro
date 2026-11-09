@@ -2,9 +2,13 @@
 import '../styles/global.css';
 
 interface Props {
-  title?: string;
-  description?: string;
+  profileName: string;
+  description: string;
+  image?: string;
 }
+
+const { profileName, description, image } = Astro.props;
+const title = `Portfolio | ${profileName}`;
 ---
 
 <!doctype html>
@@ -12,22 +16,22 @@ interface Props {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content= />
+    <meta name="generator" content={Astro.generator} />
 
     <meta name="author" content="Daniel Aguilar" />
-    <meta name="description" content= />
+    <meta name="description" content={description} />
 
-    <meta property="og:title" content= />
-    <meta property="og:description" content=/>
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta
       property="og:image"
-      content="https://danlakelake.github.io/Portfolio/resources/images/profile.webp"
+      content={image}
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
 
-    <title></title>
+    <title>{title}</title>
   </head>
 
   <body>
