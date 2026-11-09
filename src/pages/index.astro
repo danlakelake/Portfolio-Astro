@@ -1,11 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import  Header  from "../components/Header.astro";
 import { getProjects, getExperiences, getProfile } from '../lib/wordpress';
 
-const projects = await getProjects();
-const experiences = await getExperiences();
+// Obtiene Profile
 const profile = await getProfile();
+// Obtiene proyectos
+const projects = await getProjects();
+// Obtiene Experiencias
+const experiences = await getExperiences();
 
+// Elimina las etiquetas HTML y normaliza los espacios de la descripción
 const description = profile.content.rendered
   .replace(/<[^>]*>/g, '')
   .replace(/\s+/g, ' ')
@@ -17,7 +22,14 @@ const description = profile.content.rendered
   description={description}
   image={profile.acf.profile_image}
 >
-  <main class="flex min-h-screen items-center justify-center bg-slate-950">
-    <h1 class="text-5xl font-bold text-white">Portfolio</h1>
-  </main>
+  <!-- Hoja envolvente -->
+  <div class="mx-auto min-h-screen max-w-7xl bg-white px-6 py-2 sm:px-8 md:py-5 lg:px-30">
+    <!-- Header -->
+    <Header/>
+    <!-- Contenido principal -->
+    <main>
+      <!-- Portfolio sections -->
+    </main>
+    <!-- Footer -->
+  </div>
 </Layout>

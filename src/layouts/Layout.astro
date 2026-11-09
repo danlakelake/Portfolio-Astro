@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 
+// Define las propiedades
 interface Props {
   profileName: string;
   description: string;
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const { profileName, description, image } = Astro.props;
+// Construcción de OG:Title & Page Title
 const title = `Portfolio | ${profileName}`;
 ---
 

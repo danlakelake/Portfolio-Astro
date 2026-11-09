@@ -1,0 +1,67 @@
+---
+import { Menu, X } from '@lucide/astro';
+
+// Define las propiedades
+interface MenuItem {
+  label: string;
+  href: string;
+}
+
+// Etiquetas y Menu links
+const menuItems: MenuItem[] = [
+  { label: 'Sobre mí', href: '#sobre-mi' },
+  { label: 'Experiencia', href: '#experiencia' },
+  { label: 'Proyectos', href: '#projects' },
+  { label: 'Contacto', href: '#contacto' },
+];
+---
+
+<!-- Responsive Menu -->
+<div class="flex justify-end items-center px-7 py-2 md:hidden">
+  <button
+    id="menuToggle"
+    class="text-2xl cursor-pointer"
+    aria-label="Abrir menú"
+    aria-expanded="false"
+  >
+    <Menu id="iconOpen" size={32} class="stroke-2 animate-fadeIn" />
+    <X id="iconClose" size={32} class="stroke-2 hidden animate-fadeIn" />
+  </button>
+</div>
+<!-- Menu -->
+<nav
+  id="mainMenu"
+  class="hidden md:flex justify-center my-0 animate-fadeIn z-1"
+>
+  <ul
+    class="block px-9 md:px-13 py-4 md:py-3 space-x-6 space-y-4 md:space-y-0 text-sm font-medium md:flex bg-white border-none border border-main-gray rounded-4xl shadow-none md:shadow-md"
+  >
+    {
+      menuItems.map((item) => (
+        <li class="menu-links">
+          <a href={item.href}>{item.label}</a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<!-- Js -->
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const menuList = document.getElementById('mainMenu');
+  const iconOpen = document.getElementById('iconOpen');
+  const iconClose = document.getElementById('iconClose');
+
+  // Switch iconos y menu responsive
+  menuToggle?.addEventListener('click', () => {
+    menuList?.classList.toggle('hidden');
+
+    iconOpen?.classList.toggle('hidden');
+    iconClose?.classList.toggle('hidden');
+
+    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+
+    menuToggle.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+  });
+</script>
