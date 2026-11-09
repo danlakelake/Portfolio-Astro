@@ -5,7 +5,7 @@
   /* Primary colors */
   --color-primary: var(--color-indigo-500);
   /* Background colors */
-  --color-background: var(--color-stone-100);
+  --color-background: var(--color-stone-200);
   --color-surface: #fff;
   /* Text colors */
   --color-text: var(--color-gray-700);
@@ -19,6 +19,16 @@ html {
 body {
   background-color: var(--color-background);
   color: var(--color-text);
+}
+
+/* Paper Texture */
+.paper-texture {
+  background-color: var(--color-surface);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)),
+    url('../assets/background/crumpled-paper.avif');
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Menu */
@@ -39,4 +49,17 @@ body {
 
 .animate-fadeIn {
   animation: fadeIn 500ms ease-in-out;
+}
+
+/* About Me */
+.emoji-happy {
+  display: none;
+}
+
+#nameLink:hover .emoji-wave {
+  display: none;
+}
+
+#nameLink:hover .emoji-happy {
+  display: inline;
 }

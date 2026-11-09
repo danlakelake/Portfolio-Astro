@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import  Header  from "../components/Header.astro";
+import  AboutMe  from "../components/About-Me.astro";
+
 import { getProjects, getExperiences, getProfile } from '../lib/wordpress';
 
 // Obtiene Profile
@@ -23,10 +25,10 @@ const description = profile.content.rendered
   image={profile.acf.profile_image}
 >
   <!-- Hoja envolvente -->
-  <div class="mx-auto min-h-screen max-w-7xl bg-white px-6 py-2 sm:px-8 md:py-5 lg:px-30">
+  <div class="paper-texture mx-auto min-h-screen max-w-6xl px-6 py-2 sm:px-8 md:py-5 lg:px-30 shadow-lg">
     <!-- Header -->
     <Header/>
-    <!-- Contenido principal -->
+    <AboutMe profile={profile} description={description}/>
     <main>
       <!-- Portfolio sections -->
     </main>
