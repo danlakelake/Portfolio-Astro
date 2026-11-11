@@ -1,0 +1,125 @@
+---
+import type { Project } from '../schemas/wordpress';
+import { ArrowUpRight, ChevronLeft, ChevronRight } from '@lucide/astro';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<section id="projects">
+  <div
+    class="title-container mb-10 flex w-full max-w-7xl items-center justify-between"
+  >
+    <div class="title-divider"></div>
+    <h2
+      class="shrink-0 px-4 text-4xl font-bold tracking-tight text-text -rotate-3 cursor-pointer transition-all duration-200 hover:px-7 hover:text-5xl"
+    >
+      Proyectos
+    </h2>
+    <div class="title-divider"></div>
+  </div>
+  <!-- Carrusel de proyectos -->
+  <div class="relative">
+    <!-- Botón anterior -->
+    <button
+      id="prevProject"
+      aria-label="Proyecto anterior"
+      class="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-3 shadow-md cursor-pointer"
+    >
+      <ChevronLeft size={24} />
+    </button>
+
+    <!-- Contenedor Swiper -->
+    <div class="projectsSwiper swiper overflow-hidden px-8 py-0 md:py-8">
+      <!-- Wrapper -->
+      <div class="swiper-wrapper items-center">
+        {
+          projects.map((project, index) => (
+            <article
+              class:list={[
+                'swiper-slide project-slide',
+                index % 2 === 0 ? '-rotate-2' : 'rotate-2',
+              ]}
+            >
+              <div class="group relative overflow-hidden rounded-xl shadow-lg">
+                <img
+                  src={project._embedded['wp:featuredmedia'][0].source_url}
+                  alt={project._embedded['wp:featuredmedia'][0].alt_text}
+                  class="h-70 w-full object-cover"
+                />
+
+                <div class="absolute inset-0 flex items-center justify-center gap-6 bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
+                  <a
+                    href={project.acf.project_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Visitar proyecto"
+                    class="text-white transition-transform duration-200 hover:scale-125"
+                  >
+                    <ArrowUpRight size={32} />
+                  </a>
+
+                  {project.acf.github_url && (
+                    <a
+                      href={project.acf.github_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Ver repositorio en GitHub"
+                      class="text-white transition-transform duration-200 hover:scale-125"
+                    >
+                      <Icon name="simple-icons:github" class="size-7" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+    <!-- Botón siguiente -->
+    <button
+      id="nextProject"
+      aria-label="Proyecto siguiente"
+      class="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-3 shadow-md cursor-pointer"
+    >
+      <ChevronRight size={24} />
+    </button>
+  </div>
+</section>
+
+<!-- Js -->
+<script>
+  import Swiper from 'swiper';
+  import { Autoplay, Navigation } from 'swiper/modules';
+  import 'swiper/css';
+
+  const swiper = new Swiper('.projectsSwiper', {
+    modules: [Autoplay, Navigation],
+
+    loop: true,
+
+    slidesPerView: 'auto',
+    slidesPerGroup: 1,
+
+    centeredSlides: true,
+
+    spaceBetween: 32,
+    speed: 500,
+
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+
+    navigation: {
+      prevEl: '#prevProject',
+      nextEl: '#nextProject',
+    },
+  });
+</script>

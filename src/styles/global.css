@@ -5,10 +5,12 @@
   /* Primary colors */
   --color-primary: var(--color-indigo-500);
   /* Background colors */
-  --color-background: var(--color-stone-200);
+  --color-background: var(--color-stone-100);
   --color-surface: #fff;
   /* Text colors */
   --color-text: var(--color-gray-700);
+  /* Dividers */
+  --color-dividers: var(--color-stone-300);
 }
 
 /* Globals */
@@ -23,12 +25,62 @@ body {
 
 /* Paper Texture */
 .paper-texture {
-  background-color: var(--color-surface);
+  position: relative;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)),
+    linear-gradient(
+      to bottom,
+      transparent 96%,
+      rgba(151, 183, 204, 0.35) 95%,
+      transparent 99%
+    ),
+    linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
     url('../assets/background/crumpled-paper.avif');
+  background-size:
+    100% 65px,
+    cover,
+    cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat, no-repeat, no-repeat;
+}
+
+.paper-texture::after {
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: 9px;
+  width: 24px;
+  height: 99%;
+  background-image: radial-gradient(
+    circle,
+    #f4f4f4 0 5px,
+    #c5cbd3 5.5px,
+    #aab2bd 6px,
+    transparent 6.5px
+  );
+  background-size: 24px 55px;
+  background-position: center 0;
+  background-repeat: repeat-y;
+  z-index: 1;
+}
+
+.paper-texture::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -17px;
+  width: 50px;
+  height: 99%;
+  background-size: 41px 55px;
+  background-repeat: repeat-y;
+  background-image: radial-gradient(
+    circle at 56% 22%,
+    transparent 57%,
+    #4273c3 54%,
+    #3d4f6e 70%,
+    transparent 43%
+  );
+  z-index: 2;
 }
 
 /* Menu */
@@ -51,6 +103,17 @@ body {
   animation: fadeIn 500ms ease-in-out;
 }
 
+/* Title Divider */
+.title-divider {
+  @apply h-10 w-full;
+  background-color: var(--color-dividers);
+  transition: all 300ms ease;
+  mask-image: url("data:image/svg+xml,%3Csvg width='300' height='10' viewBox='0 0 300 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 L37.5 0 L75 10 L112.5 0 L150 10 L187.5 0 L225 10 L262.5 0 L300 10' stroke='white' fill='none' stroke-width='3.5'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: 100% 14px;
+}
+
 /* About Me */
 .emoji-happy {
   display: none;
@@ -62,4 +125,9 @@ body {
 
 #nameLink:hover .emoji-happy {
   display: inline;
+}
+
+/* Projects */
+.project-slide {
+  @apply w-80! md:w-75! cursor-grab active:cursor-grabbing text-center;
 }

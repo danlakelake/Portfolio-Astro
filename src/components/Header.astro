@@ -9,16 +9,16 @@ interface MenuItem {
 
 // Etiquetas y Menu links
 const menuItems: MenuItem[] = [
-  { label: 'Sobre mí', href: '#sobre-mi' },
-  { label: 'Experiencia', href: '#experiencia' },
-  { label: 'Proyectos', href: '#projects' },
-  { label: 'Contacto', href: '#contacto' },
+  { label: 'Sobre mí', href: '#about-me' },
+  { label: 'Experiencia', href: '#experience' },
+  { label: 'Proyectos', href: '#proyects' },
+  { label: 'Contacto', href: '#contact' },
 ];
 ---
 
 <!-- Language Switch & Responsive Menu -->
 <div
-  class="flex w-full justify-between items-center px-7 py-2 md:justify-end md:px-12"
+  class="flex w-full justify-between items-center px-0 md:px-12 py-2 md:justify-end"
 >
   <!-- Language Switch -->
   <button
@@ -48,7 +48,7 @@ const menuItems: MenuItem[] = [
   class="hidden md:flex justify-center my-0 animate-fadeIn z-1"
 >
   <ul
-    class="block px-9 md:px-13 py-4 md:py-3 space-x-6 space-y-4 md:space-y-0 text-sm font-medium md:flex border-none border border-main-gray rounded-4xl shadow-none md:shadow-md"
+    class="block px-2 md:px-13 py-4 md:py-3 space-x-4 md:space-x-6 space-y-4 md:space-y-0 text-sm font-medium md:flex border-none border border-main-gray rounded-md md:rounded-4xl shadow-none md:shadow-md sm:bg-transparent md:bg-background"
   >
     {
       menuItems.map((item) => (

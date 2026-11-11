@@ -1,13 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import  Header  from "../components/Header.astro";
-import  AboutMe  from "../components/About-Me.astro";
+import Header from '../components/Header.astro';
+import AboutMe from '../components/About-Me.astro';
+import Projects from '../components/Projects.astro';
 
 import { getProjects, getExperiences, getProfile } from '../lib/wordpress';
 
 // Obtiene Profile
 const profile = await getProfile();
-// Obtiene proyectos
+// Obtiene Proyectos
 const projects = await getProjects();
 // Obtiene Experiencias
 const experiences = await getExperiences();
@@ -25,12 +26,14 @@ const description = profile.content.rendered
   image={profile.acf.profile_image}
 >
   <!-- Hoja envolvente -->
-  <div class="paper-texture mx-auto min-h-screen max-w-6xl px-6 py-2 sm:px-8 md:py-5 lg:px-30 shadow-lg">
+  <div
+    class="paper-texture mx-auto min-h-screen max-w-5xl px-17.5 py-2 md:py-5 md:px-30 shadow-lg"
+  >
     <!-- Header -->
-    <Header/>
-    <AboutMe profile={profile} description={description}/>
+    <Header />
     <main>
-      <!-- Portfolio sections -->
+      <AboutMe profile={profile} description={description} />
+      <Projects projects={projects}/>
     </main>
     <!-- Footer -->
   </div>
