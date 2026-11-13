@@ -29,7 +29,7 @@ const menuItems: MenuItem[] = [
     <Globe size={18} class="stroke-2" />
     <span>EN</span>
   </button>
-  
+
   <!-- Responsive Menu -->
   <button
     id="menuToggle"
@@ -37,16 +37,15 @@ const menuItems: MenuItem[] = [
     aria-label="Abrir menú"
     aria-expanded="false"
   >
-    <Menu id="iconOpen" size={32} class="stroke-2 animate-fadeIn" />
-    <X id="iconClose" size={32} class="stroke-2 hidden animate-fadeIn" />
+    <span class="relative block size-7.5">
+      <Menu id="iconOpen" size={30} class="menu-icon" />
+      <X id="iconClose" size={30} class="menu-icon" />
+    </span>
   </button>
 </div>
 
 <!-- Menu -->
-<nav
-  id="mainMenu"
-  class="hidden md:flex justify-center my-0 animate-fadeIn z-1"
->
+<nav id="mainMenu" class="menu-transition md:flex justify-center my-0 z-1">
   <ul
     class="block px-2 md:px-13 py-4 md:py-3 space-x-4 md:space-x-6 space-y-4 md:space-y-0 text-sm font-medium md:flex border-none border border-main-gray rounded-md md:rounded-4xl shadow-none md:shadow-md sm:bg-transparent md:bg-background"
   >
@@ -64,18 +63,17 @@ const menuItems: MenuItem[] = [
 <script>
   const menuToggle = document.getElementById('menuToggle');
   const menuList = document.getElementById('mainMenu');
-  const iconOpen = document.getElementById('iconOpen');
-  const iconClose = document.getElementById('iconClose');
 
-  // Switch iconos y menu responsive
+  // Switch iconos, menu responsive y rotación
   menuToggle?.addEventListener('click', () => {
-    menuList?.classList.toggle('hidden');
+    const isOpen = menuToggle.classList.toggle('menu-open');
 
-    iconOpen?.classList.toggle('hidden');
-    iconClose?.classList.toggle('hidden');
+    menuList?.classList.toggle('menu-transition-open', isOpen);
 
-    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-
-    menuToggle.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.setAttribute(
+      'aria-label',
+      isOpen ? 'Cerrar menú' : 'Abrir menú',
+    );
   });
 </script>

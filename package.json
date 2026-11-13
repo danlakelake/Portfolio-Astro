@@ -19,5 +19,8 @@
     "astro-icon": "^1.2.0",
     "swiper": "^14.4.0",
     "tailwindcss": "^4.3.4"
+  },
+  "devDependencies": {
+    "prettier": "^3.10.1"
   }
 }

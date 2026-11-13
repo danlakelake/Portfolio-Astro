@@ -6,9 +6,11 @@
   --color-primary: var(--color-indigo-500);
   /* Background colors */
   --color-background: var(--color-stone-100);
-  --color-surface: #fff;
+  --color-surface: var(--color-stone-100);
+  --color-cards: var(--color-mist-50);
   /* Text colors */
   --color-text: var(--color-gray-700);
+  --color-subtitle: var(--color-gray-400);
   /* Dividers */
   --color-dividers: var(--color-stone-300);
 }
@@ -43,64 +45,52 @@ body {
   background-repeat: repeat, no-repeat, no-repeat;
 }
 
-.paper-texture::after {
-  content: '';
-  position: absolute;
-  top: 11px;
-  left: 9px;
-  width: 24px;
-  height: 99%;
-  background-image: radial-gradient(
-    circle,
-    #f4f4f4 0 5px,
-    #c5cbd3 5.5px,
-    #aab2bd 6px,
-    transparent 6.5px
-  );
-  background-size: 24px 55px;
-  background-position: center 0;
-  background-repeat: repeat-y;
-  z-index: 1;
-}
-
-.paper-texture::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -17px;
-  width: 50px;
-  height: 99%;
-  background-size: 41px 55px;
-  background-repeat: repeat-y;
-  background-image: radial-gradient(
-    circle at 56% 22%,
-    transparent 57%,
-    #4273c3 54%,
-    #3d4f6e 70%,
-    transparent 43%
-  );
-  z-index: 2;
-}
-
 /* Menu */
 .menu-links {
   @apply transition-all duration-100 hover:text-primary hover:text-base;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
+.menu-icon {
+  @apply absolute inset-0 transition-all duration-300;
+}
 
-  to {
-    opacity: 1;
+#iconOpen {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+#iconClose {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0);
+}
+
+#menuToggle.menu-open #iconOpen {
+  opacity: 0;
+  transform: rotate(90deg) scale(0);
+}
+
+#menuToggle.menu-open #iconClose {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+.menu-transition {
+  @apply overflow-hidden opacity-0 max-h-0 transition-all duration-300 ease-in-out;
+}
+
+.menu-transition-open {
+  @apply opacity-100 max-h-96;
+}
+
+@media (min-width: 48rem) {
+  .menu-transition {
+    @apply max-h-none overflow-visible opacity-100;
   }
 }
 
-.animate-fadeIn {
-  animation: fadeIn 500ms ease-in-out;
+/* Section Titles*/
+.section-title {
+  @apply shrink-0 px-4 text-4xl font-bold tracking-tight text-text cursor-pointer transition-all duration-200 hover:text-5xl;
 }
 
 /* Title Divider */
@@ -108,7 +98,16 @@ body {
   @apply h-10 w-full;
   background-color: var(--color-dividers);
   transition: all 300ms ease;
-  mask-image: url("data:image/svg+xml,%3Csvg width='300' height='10' viewBox='0 0 300 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 L37.5 0 L75 10 L112.5 0 L150 10 L187.5 0 L225 10 L262.5 0 L300 10' stroke='white' fill='none' stroke-width='3.5'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg width='300' height='10' viewBox='0 0 300 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 L37.5 0 L75 10 L112.5 0 L150 10 L187.5 0 L225 10 L262.5 0 L300 10' stroke='white' fill='none' stroke-width='3'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: 100% 14px;
+}
+
+/* Title Divider Right */
+.title-divider-right {
+  mask-size: 100%;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M0 14 L10 0 L20 14 L30 0 L40 14 L50 0 L60 14 L70 0 L80 14 L90 0 L100 14 L110 0 L120 14 L130 0 L140 14 L150 0 L160 14 L170 0 L180 14 L190 0 L200 14 L210 0 L220 14 L230 0 L240 14 L250 0 L260 14 L270 0 L280 14 L290 0 L300 14' stroke='white' fill='none' stroke-width='2.5'/%3E%3C/svg%3E");
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: 100% 14px;
@@ -131,3 +130,17 @@ body {
 .project-slide {
   @apply w-80! md:w-75! cursor-grab active:cursor-grabbing text-center;
 }
+
+/* Experiences */
+.experience-toggle {
+  @apply mt-3 inline-flex justify-center items-start gap-0 font-semibold text-lg/5 text-primary cursor-pointer;
+}
+
+.experience-description {
+  @apply overflow-hidden max-h-12 transition-all duration-300 ease-in-out;
+}
+
+.experience-description-open {
+  @apply max-h-96;
+}
+ 

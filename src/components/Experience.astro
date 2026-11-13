@@ -1,0 +1,115 @@
+---
+import type { Experience } from '../schemas/wordpress';
+import { ChevronDown, ChevronUp } from '@lucide/astro';
+
+interface Props {
+  experiences: Experience[];
+}
+
+const { experiences } = Astro.props;
+
+const decodeHtml = (text: string) => {
+  return text
+    .replace(/&amp;/g, '&')
+    .replace(/&#8211;/g, '–')
+    .replace(/&#8212;/g, '—')
+    .replace(/&#8217;/g, '’')
+    .replace(/&#8216;/g, '‘')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'");
+};
+
+const formatDate = (date: string) => {
+  const [year, month] = date.split('-');
+  const monthName = new Intl.DateTimeFormat('es-MX', {
+    month: 'short',
+  }).format(new Date(Number(year), Number(month) - 1, 1));
+  return `${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${year}`;
+};
+---
+
+<!-- Sección Experiencia -->
+<section id="experiencia" class="flex flex-col items-start py-8">
+  <!-- Título -->
+  <div class="mb-11 flex w-full items-center justify-start gap-4">
+    <h2 class="section-title">Experiencia</h2>
+
+    <div class="title-divider title-divider-right"></div>
+  </div>
+  <!-- Contenedor de experiencias -->
+  <div class="grid grid-cols-1 gap-5 md:grid-cols-12">
+    <!-- Lista de experiencias -->
+    <div class="md:col-span-7">
+      <h3 class="mb-5 text-2lg font-semibold text-subtitle">
+        Últimas 4 Experiencias Laborales
+      </h3>
+
+      <!-- Tarjetas de experiencias -->
+      <div class="flex flex-col gap-5">
+        {experiences.map((experience) => (
+          <article class="rounded-xl border border-gray-200 p-5 bg-cards">
+            <!-- Periodo laboral -->
+            <div class="mt-3 text-sm text-subtitle">
+              {formatDate(experience.acf.start_date)} -{' '}
+              {experience.acf.currently_working
+                ? 'Actualmente'
+                : formatDate(experience.acf.end_date)}{' '}
+              |{' '}
+              <span class="font-semibold text-primary">
+                {experience.acf.company}
+              </span>
+            </div>
+            <!-- Encabezado laboral -->
+            <div class="flex flex-col gap-1">
+              <h4 class="text-lg font-bold text-text">
+                {decodeHtml(experience.title.rendered)}
+              </h4>
+              <p class="text-sm text-subtitle">{experience.acf.location}</p>
+            </div>
+
+            <!-- Descripción -->
+            <div class="experience-description mt-4 text-text">
+              <Fragment set:html={experience.content.rendered} />
+            </div>
+
+            <!-- Botón Ver más / Ver menos -->
+            <button
+              type="button"
+              class="experience-toggle"
+              aria-expanded="false"
+            >
+              <span>Ver más</span>
+              <ChevronDown size={24} class="stroke-2" />
+              <ChevronUp size={24} class="stroke-2 hidden" />
+            </button>
+          </article>
+        ))}
+      </div>
+    </div>
+    <!-- CV y contacto -->
+    <div class="md:col-span-5"><!-- Lo trabajaremos después --></div>
+  </div>
+</section>
+
+<!-- Js -->
+<script>
+  const toggleButtons = document.querySelectorAll('.experience-toggle');
+
+  toggleButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const iconDown = button.querySelector('.lucide-chevron-down');
+      const iconUp = button.querySelector('.lucide-chevron-up');
+      const article = button.closest('article');
+      const description = article?.querySelector('.experience-description');
+
+      const isExpanded = description?.classList.toggle(
+        'experience-description-open',
+      );
+
+      button.setAttribute('aria-expanded', String(isExpanded));
+
+      iconDown?.classList.toggle('hidden', isExpanded);
+      iconUp?.classList.toggle('hidden', !isExpanded);
+    });
+  });
+</script>

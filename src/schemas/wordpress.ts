@@ -54,6 +54,9 @@ export const ExperienceSchema = z.object({
   title: z.object({
     rendered: z.string(),
   }),
+  content: z.object({
+    rendered: z.string(),
+  }),
   acf: z.object({
     company: z.string(),
     location: z.string(),
