@@ -132,15 +132,29 @@ body {
 }
 
 /* Experiences */
+.experience-card {
+  @apply rounded-xl border border-gray-200 p-5 bg-cards 
+  cursor-pointer hover:bg-background transition-all duration-100 ease-out;
+}
+
+.experience-description {
+  @apply line-clamp-3 transition-all duration-300 ease-in-out;
+}
+
+.experience-description-open {
+  @apply line-clamp-none;
+}
+
 .experience-toggle {
   @apply mt-3 inline-flex justify-center items-start gap-0 font-semibold text-lg/5 text-primary cursor-pointer;
 }
 
-.experience-description {
-  @apply overflow-hidden max-h-12 transition-all duration-300 ease-in-out;
+.experience-text {
+  @apply inline-flex items-center gap-1
+  transition-all duration-50
+  hover:text-2xl hover:underline;
 }
 
-.experience-description-open {
-  @apply max-h-96;
+.experience-text.hidden {
+  display: none;
 }
- 

@@ -65,6 +65,7 @@ export const ExperienceSchema = z.object({
     currently_working: z.boolean(),
     employment_type: z.string(),
     work_arrangement: z.string(),
+    technologies: z.array(z.string()),
   }),
 });
 
