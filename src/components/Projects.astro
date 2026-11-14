@@ -29,7 +29,7 @@ const { projects } = Astro.props;
     <button
       id="prevProject"
       aria-label="Proyecto anterior"
-      class="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-3 shadow-md cursor-pointer"
+      class="slider-btn slider-btn-prev"
     >
       <ChevronLeft size={24} />
     </button>
@@ -46,14 +46,14 @@ const { projects } = Astro.props;
                 index % 2 === 0 ? '-rotate-2' : 'rotate-2',
               ]}
             >
-              <div class="group relative overflow-hidden rounded-xl shadow-lg">
+              <div class="project-img group hover:scale-75">
                 <img
                   src={project._embedded['wp:featuredmedia'][0].source_url}
                   alt={project._embedded['wp:featuredmedia'][0].alt_text}
                   class="h-70 w-full object-cover"
                 />
 
-                <div class="absolute inset-0 flex items-center justify-center gap-6 bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
+                <div class="project-overlay">
                   <a
                     href={project.acf.project_url}
                     target="_blank"
@@ -86,7 +86,7 @@ const { projects } = Astro.props;
     <button
       id="nextProject"
       aria-label="Proyecto siguiente"
-      class="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-3 shadow-md cursor-pointer"
+      class="slider-btn slider-btn-next"
     >
       <ChevronRight size={24} />
     </button>

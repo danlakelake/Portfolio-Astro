@@ -1,0 +1,77 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const footerLinks = [
+  { label: 'Sobre mí', href: '#about-me' },
+  { label: 'Experiencia', href: '#experiences' },
+  { label: 'Proyectos', href: '#projects' },
+  { label: 'Contacto', href: '#contact' },
+];
+
+const technologies = [
+  {
+    name: 'Astro',
+    icon: 'simple-icons:astro',
+    color: '#BC52EE',
+    url: 'https://astro.build/',
+  },
+  {
+    name: 'Tailwind CSS',
+    icon: 'simple-icons:tailwindcss',
+    color: '#06B6D4',
+    url: 'https://tailwindcss.com/',
+  },
+  {
+    name: 'TypeScript',
+    icon: 'simple-icons:typescript',
+    color: '#3178C6',
+    url: 'https://www.typescriptlang.org/',
+  },
+  {
+    name: 'WordPress',
+    icon: 'simple-icons:wordpress',
+    color: '#135E96',
+    url: 'https://wordpress.org/',
+  },
+];
+---
+<footer>
+  <!-- Separador zigzag -->
+  <div
+    class="footer-divider">
+  </div>
+  <div
+    class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 text-sm font-medium text-gray-600 md:flex-row"
+  >
+    <nav class="flex flex-col items-center gap-4 md:flex-row">
+      {footerLinks.map((link) => (
+        <a
+          href={link.href}
+          class="menu-links"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <span class="text-subtitle">
+     Danlakelake © {new Date().getFullYear()} Todos los derechos reservados.
+    </span>
+  </div>
+  <!-- Technologies -->
+    <div class="footer-technologies">
+      {technologies.map((technology) => (
+        <a
+          href={technology.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={technology.name}
+          aria-label={technology.name}
+          class="tech-icons"
+          style={`color: ${technology.color}`}
+        >
+          <Icon name={technology.icon} class="size-7" />
+        </a>
+      ))}
+    </div>
+</footer>
